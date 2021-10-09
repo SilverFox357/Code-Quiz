@@ -5,10 +5,10 @@ questionItem = document.querySelector("#question");
 
 let scoreBox = document.querySelector("#score-value");
 
-let questionBox = document.getElementById("#question-box");
-let startBox = document.getElementById("#start-box");
-let score = document.getElementById("#score-box");
-let scoreBoard = document.getElementById("#score-board");
+let questionBox = document.getElementById("question-box");
+let startBox = document.getElementById("start-box");
+let scoreForm = document.getElementById("score-box");
+let scoreBoard = document.getElementById("score-board");
 
 let currentScore = 0;
 let timeRemaining = 60;
@@ -33,7 +33,8 @@ function startTimer() {
 
 function stopTimer() {
     clearInterval(intervalID);
-
+    questionBox.style.display = "none";
+    scoreForm.style.display = "flex";
 }
 
 
@@ -43,6 +44,15 @@ function stopTimer() {
 //      hide start form
 //      show question form
 //      start timer
+
+document.getElementById("start").addEventListener("click", function() {
+    startBox.style.display = "none";
+    questionBox.style.display = "flex";
+    timeRemaining = 60;
+    currentScore = 0;
+    startTimer();
+    loadQuestion();
+})
 
 
 
