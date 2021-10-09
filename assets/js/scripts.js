@@ -5,11 +5,36 @@ questionItem = document.querySelector("#question");
 
 let scoreBox = document.querySelector("#score-value");
 
+let questionBox = document.getElementById("#question-box");
+let startBox = document.getElementById("#start-box");
+let score = document.getElementById("#score-box");
+let scoreBoard = document.getElementById("#score-board");
+
 let currentScore = 0;
+let timeRemaining = 60;
 
 //Code for timer
 //  start timer
 //  display timer remianing on screen span - timer_coutdown
+
+function startTimer() {
+    const timeDisplay = document.getElementById("timer-countdown");
+
+    intervalID = setInterval(function () {
+    timeRemaining--;
+
+    timeDisplay.innerText = timeRemaining + "s";
+
+    if (timeRemaining <= 0) {
+        stopTimer();
+    }
+    }, 1000);
+}
+
+function stopTimer() {
+    clearInterval(intervalID);
+
+}
 
 
 //Loading screen:
