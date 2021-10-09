@@ -9,7 +9,9 @@ let questionBox = document.getElementById("question-box");
 let startBox = document.getElementById("start-box");
 let scoreForm = document.getElementById("score-box");
 let scoreBoard = document.getElementById("score-board");
+let initials = document.getElementById("initials");
 
+let highScore = [{score:50,initial:"WH"}];
 let currentScore = 0;
 let timeRemaining = 60;
 
@@ -108,20 +110,15 @@ var loadQuestion = function(){
 }
 
 document.getElementById("answers").addEventListener("click", function(e){
-    console.log(e.target);
-    console.log(e.target.dataset.correctAnswer);
 
     if (e.target.dataset.correctAnswer === "true") {
-        console.log(e.target.dataset.correctAnswer);
         currentScore = currentScore + 2;
         scoreBox.innerHTML=currentScore;
-        console.log(document.getElementById("score-value").innerHTML);
     }
     else {
-        console.log("Incorrect");
         currentScore = currentScore - 1;
         scoreBox.innerHTML=currentScore;
-        console.log(document.getElementById("score-value").innerHTML);
+        timeRemaining-=5;
     }
 
     loadQuestion();
@@ -134,6 +131,17 @@ document.getElementById("answers").addEventListener("click", function(e){
 //  save initials and score to local storage
 //  hide score form
 //  show score board
+document.getElementById("save").addEventListener("click", function(){
+    if (initials.value) {
+    highScore.push({score:currentScore,initial:initials.value});
+    localStorage.setItem("score", JSON.stringify(highScore));
+    scoreForm.style.display = "none";
+    scoreBoard.style.display = "flex";
+    }
+    else {
+    alert("Please Enter Initials!");
+    }
+})
 
 
 //Score Board
@@ -143,5 +151,3 @@ document.getElementById("answers").addEventListener("click", function(e){
 //  listen for click on close button
 //  close score board
 //  open start form
-
-loadQuestion();
